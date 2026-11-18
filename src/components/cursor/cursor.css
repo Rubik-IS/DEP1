@@ -1,0 +1,121 @@
+/* ==========================================================================
+   RUBIK NEXUS — CINEMATIC ARCHITECTURAL CURSOR SYSTEM
+   Scoped strictly to fine-pointer desktop devices when active.
+   ========================================================================== */
+
+@media (pointer: fine) and (hover: hover) {
+  html.nexus-cursor-active,
+  html.nexus-cursor-active body,
+  html.nexus-cursor-active a,
+  html.nexus-cursor-active button,
+  html.nexus-cursor-active [role="button"],
+  html.nexus-cursor-active [data-interactive],
+  html.nexus-cursor-active [data-cursor="interactive"],
+  html.nexus-cursor-active [data-cursor="cta"],
+  html.nexus-cursor-active [data-cursor="nexus-3d"],
+  html.nexus-cursor-active canvas {
+    cursor: none;
+  }
+
+  /* STATE 06 — Explicitly preserve native text cursor on inputs/textareas/selects */
+  html.nexus-cursor-active
+    input:not([type="button"]):not([type="submit"]):not([type="checkbox"]):not(
+      [type="radio"]
+    ),
+  html.nexus-cursor-active textarea,
+  html.nexus-cursor-active select,
+  html.nexus-cursor-active [contenteditable="true"],
+  html.nexus-cursor-active [data-cursor="text"] {
+    cursor: text !important;
+  }
+
+  /* STATE 07 — Explicitly preserve native not-allowed cursor on disabled controls */
+  html.nexus-cursor-active :disabled,
+  html.nexus-cursor-active [aria-disabled="true"],
+  html.nexus-cursor-active [data-cursor="disabled"] {
+    cursor: not-allowed !important;
+  }
+}
+
+/* Keyframes for Orbital Ring System & Crystalline Core */
+@keyframes nexus-orbit-cw {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes nexus-orbit-ccw {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes nexus-diamond-spin {
+  0% {
+    transform: rotate(45deg) scale(1);
+  }
+  50% {
+    transform: rotate(225deg) scale(1.08);
+  }
+  100% {
+    transform: rotate(405deg) scale(1);
+  }
+}
+
+@keyframes nexus-ripple-burst {
+  0% {
+    transform: translate3d(-50%, -50%, 0) scale(0.35);
+    opacity: 0.92;
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) scale(2.35);
+    opacity: 0;
+  }
+}
+
+.nexus-orbit-spin-slow {
+  animation: nexus-orbit-cw 14s linear infinite;
+}
+
+.nexus-orbit-spin-reverse {
+  animation: nexus-orbit-ccw 9s linear infinite;
+}
+
+/* Accelerate orbital rotation during CTA, 3D Nexus lock, or 3D drag */
+.nexus-cursor-root[data-state="cta"] .nexus-orbit-spin-slow,
+.nexus-cursor-root[data-state="nexus-3d"] .nexus-orbit-spin-slow {
+  animation-duration: 6.5s;
+}
+
+.nexus-cursor-root[data-dragging-3d="true"] .nexus-orbit-spin-slow,
+.nexus-cursor-root[data-cubie-hover="true"] .nexus-orbit-spin-slow {
+  animation-duration: 3.4s;
+}
+
+.nexus-cursor-root[data-state="cta"] .nexus-orbit-spin-reverse,
+.nexus-cursor-root[data-state="nexus-3d"] .nexus-orbit-spin-reverse {
+  animation-duration: 4.5s;
+}
+
+.nexus-cursor-root[data-dragging-3d="true"] .nexus-orbit-spin-reverse,
+.nexus-cursor-root[data-cubie-hover="true"] .nexus-orbit-spin-reverse {
+  animation-duration: 2.4s;
+}
+
+/* Click energy ripple trigger */
+.nexus-ripple-active {
+  animation: nexus-ripple-burst 0.52s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Respect reduced motion at CSS layer as well */
+@media (prefers-reduced-motion: reduce) {
+  .nexus-cursor-root {
+    display: none !important;
+  }
+}

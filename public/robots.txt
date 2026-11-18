@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Rubik Integrated Systems — Official Sitemap
+Sitemap: https://www.rubik-is.com/sitemap.xml
